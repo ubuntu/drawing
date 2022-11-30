@@ -1,0 +1,44 @@
+name: drawing
+adopt-info: drawing
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict
+base: core22
+architectures:
+  - build-on: amd64
+
+layout:
+  /usr/share/drawing:
+    bind: $SNAP/usr/share/drawing
+
+slots:
+  # for GtkApplication registration
+  drawing:
+    interface: dbus
+    bus: session
+    name: com.github.maoschanz.drawing
+
+apps:
+  drawing:
+    command: usr/bin/drawing
+    extensions: [gnome]
+    common-id: com.github.maoschanz.drawing.desktop
+    desktop: usr/share/applications/com.github.maoschanz.drawing.desktop
+    plugs:
+      - home
+    environment:
+      PYTHONPATH: $SNAP/gnome-platform/usr/lib/python3/dist-packages:$SNAP/gnome-platform/usr/lib/python3.10
+
+parts:
+  drawing:
+    source: https://github.com/maoschanz/drawing.git
+    source-tag: 1.0.1
+    plugin: meson
+    meson-parameters:
+      - --prefix=/usr
+    parse-info: [usr/share/metainfo/com.github.maoschanz.drawing.appdata.xml]
+    organize:
+      snap/drawing/current/usr: usr
+    build-packages: [ git ]
+    override-pull: |
+      craftctl default
+      craftctl set version=$(git describe --tags --abbrev=10)
