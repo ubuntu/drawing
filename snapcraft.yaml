@@ -3,6 +3,9 @@ adopt-info: drawing
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict
 base: core22
+issues: https://github.com/ubuntu/drawing/issues
+contact: https://github.com/ubuntu/drawing
+website: https://maoschanz.github.io/drawing
 architectures:
   - build-on: amd64
 
