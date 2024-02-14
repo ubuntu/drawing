@@ -6,8 +6,6 @@ base: core22
 issues: https://github.com/ubuntu/drawing/issues
 contact: https://github.com/ubuntu/drawing
 website: https://maoschanz.github.io/drawing
-architectures:
-  - build-on: amd64
 
 layout:
   /usr/share/drawing:
