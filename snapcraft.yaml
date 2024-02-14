@@ -34,7 +34,7 @@ apps:
 parts:
   drawing:
     source: https://github.com/maoschanz/drawing.git
-    source-tag: 1.0.1
+    source-tag: 1.0.2
     plugin: meson
     meson-parameters:
       - --prefix=/usr
@@ -44,4 +44,5 @@ parts:
     build-packages: [ git ]
     override-pull: |
       craftctl default
+      sed -i 's#@PYTHON@#/usr/bin/env python3#g' src/drawing.in
       craftctl set version=$(git describe --tags --abbrev=10)
